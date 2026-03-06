@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lic. Nombre Apellido | Psicología Clínica</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            900: '#134e4a',
+                        },
+                        accent: {
+                            50: '#fafaf9',
+                            100: '#f5f5f4',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+            (function () {
+                emailjs.init({
+                    publicKey: "H_k_y63PfY_hf4VXr",
+                });
+            })();
+    </script>
+</head>
+
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-100 selection:text-brand-700">
+
+    <!-- HEADER & NAVEGACIÓN -->
+    <header class="fixed w-full bg-white/90 backdrop-blur-md z-40 border-b border-slate-100 transition-all duration-300"
+        x-data="{ mobileMenuOpen: false }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-2xl font-bold text-slate-800 tracking-tight">
+                        Lic. <span class="text-brand-600">TuNombre</span>.
+                    </a>
+                </div>
+
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="#inicio"
+                        class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Inicio</a>
+                    <a href="#sobre-mi" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Sobre
+                        Mí</a>
+                    <a href="#servicios"
+                        class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Servicios</a>
+                    <a href="#testimonios"
+                        class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Testimonios</a>
+                    <a href="#contacto"
+                        class="bg-brand-600 hover:bg-brand-700 text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-sm shadow-brand-500/30 hover:shadow-md">
+                        Agendar Turno
+                    </a>
+                </nav>
+
+                <div class="md:hidden flex items-center">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" type="button"
+                        class="text-slate-600 hover:text-brand-600 focus:outline-none">
+                        <svg class="h-6 w-6" x-show="!mobileMenuOpen" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg class="h-6 w-6" x-show="mobileMenuOpen" style="display: none;" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false"
+            class="md:hidden bg-white border-t border-slate-100 absolute w-full" style="display: none;">
+            <div class="px-4 pt-2 pb-6 space-y-1 shadow-lg">
+                <a @click="mobileMenuOpen = false" href="#inicio"
+                    class="block px-3 py-3 text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-slate-50 rounded-md">Inicio</a>
+                <a @click="mobileMenuOpen = false" href="#sobre-mi"
+                    class="block px-3 py-3 text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-slate-50 rounded-md">Sobre
+                    Mí</a>
+                <a @click="mobileMenuOpen = false" href="#servicios"
+                    class="block px-3 py-3 text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-slate-50 rounded-md">Servicios</a>
+                <a @click="mobileMenuOpen = false" href="#testimonios"
+                    class="block px-3 py-3 text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-slate-50 rounded-md">Testimonios</a>
+                <a @click="mobileMenuOpen = false" href="#contacto"
+                    class="block w-full text-center mt-4 bg-brand-600 text-white px-5 py-3 rounded-full font-medium">
+                    Agendar Turno
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECCIÓN HERO -->
+    <section id="inicio" class="pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="max-w-2xl">
+                    <span
+                        class="inline-block py-1 px-3 rounded-full bg-brand-50 text-brand-700 text-sm font-semibold mb-6">
+                        Salud Mental y Bienestar
+                    </span>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-6">
+                        Un espacio seguro para tu <span class="text-brand-600">bienestar emocional</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-slate-600 mb-8 leading-relaxed">
+                        Te acompaño en el proceso de descubrir tus herramientas internas, superar la ansiedad y
+                        construir una vida congruente con tus valores.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contacto"
+                            class="inline-flex justify-center items-center bg-brand-600 hover:bg-brand-700 text-white px-8 py-3.5 rounded-full font-semibold transition-all shadow-lg shadow-brand-500/30 hover:shadow-brand-500/50 hover:-translate-y-0.5">
+                            Comenzar Terapia
+                        </a>
+                        <a href="#sobre-mi"
+                            class="inline-flex justify-center items-center bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 px-8 py-3.5 rounded-full font-semibold transition-all">
+                            Conocer más
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative mt-10 lg:mt-0">
+                    <div
+                        class="absolute inset-0 bg-brand-100 rounded-full blur-3xl opacity-50 transform translate-x-10 translate-y-10">
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Psicología y bienestar"
+                        class="relative rounded-3xl shadow-xl w-full object-cover h-[400px] md:h-[500px] grayscale-[20%] sepia-[10%]">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN SOBRE MÍ -->
+    <section id="sobre-mi" class="py-20 lg:py-28 bg-accent-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+                <div class="lg:col-span-5 flex justify-center lg:justify-start">
+                    <div class="relative">
+                        <div
+                            class="absolute inset-0 rounded-full border-2 border-brand-200 transform translate-x-4 translate-y-4">
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Retrato Profesional"
+                            class="relative rounded-full w-64 h-64 md:w-80 md:h-80 object-cover shadow-lg border-4 border-white">
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Sobre Mí</h2>
+                    <h3 class="text-xl text-brand-600 font-medium mb-6">Licenciada en Psicología Clínica</h3>
+
+                    <p class="text-slate-600 text-lg mb-6 leading-relaxed">
+                        Hola, soy [Tu Nombre]. Me apasiona ayudar a las personas a encontrar claridad en medio de la
+                        confusión. Cuento con más de [X] años de experiencia trabajando desde un enfoque basado en la
+                        empatía, la escucha activa y la evidencia científica.
+                    </p>
+                    <p class="text-slate-600 text-lg mb-8 leading-relaxed">
+                        Mi objetivo es brindarte un refugio seguro, libre de juicios, donde podamos desenredar aquello
+                        que te detiene y fomentar tu crecimiento personal.
+                    </p>
+
+                    <div
+                        class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col sm:flex-row gap-6 sm:items-center">
+                        <div class="flex items-center text-slate-700">
+                            <i class="fa-solid fa-id-card text-brand-500 text-xl mr-3"></i>
+                            <span class="font-medium">M.N: <span class="font-bold">12345</span></span>
+                        </div>
+                        <div class="hidden sm:block w-px h-8 bg-slate-200"></div>
+                        <div class="flex items-center text-slate-700">
+                            <i class="fa-solid fa-building text-brand-500 text-xl mr-3"></i>
+                            <span class="font-medium">M.P: <span class="font-bold">67890</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE METODOLOGÍA -->
+    <section class="py-20 lg:py-28 bg-white text-center">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Mi Enfoque Terapéutico</h2>
+            <p class="text-lg text-slate-600 leading-relaxed mb-10">
+                Trabajo principalmente desde el <strong>Enfoque Cognitivo-Conductual (TCC)</strong> y terapias de
+                tercera generación (ACT, Mindfulness). Esto significa que nos enfocaremos no solo en entender el origen
+                de tus problemas, sino en desarrollar herramientas prácticas para manejarlos en el "aquí y ahora".
+            </p>
+            <div class="flex justify-center gap-6 flex-wrap">
+                <span class="bg-brand-50 text-brand-700 px-5 py-2.5 rounded-full font-medium">Terapia Breve</span>
+                <span class="bg-brand-50 text-brand-700 px-5 py-2.5 rounded-full font-medium">Basada en Evidencia</span>
+                <span class="bg-brand-50 text-brand-700 px-5 py-2.5 rounded-full font-medium">Centrada en
+                    Soluciones</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE SERVICIOS -->
+    <section id="servicios" class="py-20 lg:py-28 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Mis Servicios</h2>
+                <p class="text-lg text-slate-600">
+                    Ofrezco un espacio seguro y profesional para abordar las diferentes áreas de tu vida que requieren
+                    atención y cuidado.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Tarjeta 1 -->
+                <div
+                    class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow border border-slate-100 group">
+                    <div
+                        class="w-14 h-14 bg-brand-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-600 transition-colors">
+                        <i
+                            class="fa-solid fa-user text-brand-600 text-2xl group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Terapia Individual</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Un espacio uno a uno para trabajar en tu ansiedad, depresión, autoestima o crisis vitales.
+                    </p>
+                </div>
+
+                <!-- Tarjeta 2 -->
+                <div
+                    class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow border border-slate-100 group">
+                    <div
+                        class="w-14 h-14 bg-brand-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-600 transition-colors">
+                        <i
+                            class="fa-solid fa-cloud-rain text-brand-600 text-2xl group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Manejo de Ansiedad</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Herramientas prácticas para gestionar ataques de pánico, fobias y preocupaciones crónicas.
+                    </p>
+                </div>
+
+                <!-- Tarjeta 3 -->
+                <div
+                    class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow border border-slate-100 group">
+                    <div
+                        class="w-14 h-14 bg-brand-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-600 transition-colors">
+                        <i
+                            class="fa-solid fa-user-group text-brand-600 text-2xl group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Terapia de Pareja</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Mejora la comunicación, resuelve conflictos y reconstruye la confianza en tu relación.
+                    </p>
+                </div>
+
+                <!-- Tarjeta 4 -->
+                <div
+                    class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow border border-slate-100 group">
+                    <div
+                        class="w-14 h-14 bg-brand-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-600 transition-colors">
+                        <i
+                            class="fa-solid fa-laptop text-brand-600 text-2xl group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Atención Online</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Terapia desde la comodidad de tu hogar, disponible en todo el mundo vía Google Meet o Zoom.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE TESTIMONIOS -->
+    <section id="testimonios" class="py-20 lg:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Lo que dicen mis pacientes</h2>
+                <div class="w-20 h-1 bg-brand-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonio 1 -->
+                <div class="bg-accent-50 rounded-2xl p-8 relative">
+                    <i class="fa-solid fa-quote-left text-4xl text-brand-200 absolute top-6 left-6 opacity-50"></i>
+                    <p class="text-slate-700 italic relative z-10 mb-6 mt-4">
+                        "Empecé terapia sintiéndome completamente abrumada por la ansiedad. En pocas sesiones aprendí
+                        herramientas que cambiaron mi día a día. Me siento mucho más en paz conmigo misma."
+                    </p>
+                    <div class="flex items-center mt-6 border-t border-slate-200 pt-6">
+                        <div
+                            class="w-10 h-10 bg-brand-100 rounded-full flex items-center justify-center text-brand-600 font-bold">
+                            P</div>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-slate-900">Paciente Anónima</h4>
+                            <span class="text-sm text-slate-500">Terapia Individual</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonio 2 -->
+                <div class="bg-accent-50 rounded-2xl p-8 relative">
+                    <i class="fa-solid fa-quote-left text-4xl text-brand-200 absolute top-6 left-6 opacity-50"></i>
+                    <p class="text-slate-700 italic relative z-10 mb-6 mt-4">
+                        "Encontrar a alguien que te escuche sin juzgarte es difícil. Con su ayuda logré superar un duelo
+                        muy complejo que arrastraba hace años. Eternamente agradecido."
+                    </p>
+                    <div class="flex items-center mt-6 border-t border-slate-200 pt-6">
+                        <div
+                            class="w-10 h-10 bg-brand-100 rounded-full flex items-center justify-center text-brand-600 font-bold">
+                            M</div>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-slate-900">Paciente Anónimo</h4>
+                            <span class="text-sm text-slate-500">Terapia Online</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonio 3 (Oculto en tablet, visible en lg) -->
+                <div class="bg-accent-50 rounded-2xl p-8 relative hidden lg:block">
+                    <i class="fa-solid fa-quote-left text-4xl text-brand-200 absolute top-6 left-6 opacity-50"></i>
+                    <p class="text-slate-700 italic relative z-10 mb-6 mt-4">
+                        "Fuimos a terapia de pareja como último recurso. No solo salvamos nuestra relación, sino que
+                        aprendimos a comunicarnos de una manera completamente nueva y más sana."
+                    </p>
+                    <div class="flex items-center mt-6 border-t border-slate-200 pt-6">
+                        <div
+                            class="w-10 h-10 bg-brand-100 rounded-full flex items-center justify-center text-brand-600 font-bold">
+                            J</div>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-slate-900">Pareja Anónima</h4>
+                            <span class="text-sm text-slate-500">Terapia de Pareja</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE CONTACTO -->
+    <section id="contacto" class="py-20 lg:py-28 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+
+                <!-- Info de Contacto -->
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Da el primer paso</h2>
+                    <p class="text-slate-400 text-lg mb-10 leading-relaxed">
+                        Si sientes que es el momento de empezar a trabajar en ti, envíame un mensaje. Coordinaremos una
+                        primera sesión de evaluación o responderé cualquier duda que tengas.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center shrink-0">
+                                <i class="fa-brands fa-whatsapp text-brand-400 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium text-white">WhatsApp</h4>
+                                <a href="https://wa.me/1234567890" target="_blank"
+                                    class="text-slate-400 hover:text-brand-400 transition-colors">+54 9 11 1234-5678</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-envelope text-brand-400 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium text-white">Email</h4>
+                                <a href="mailto:turno@psicologo.com"
+                                    class="text-slate-400 hover:text-brand-400 transition-colors">turno@psicologo.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-location-dot text-brand-400 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium text-white">Consultorio</h4>
+                                <p class="text-slate-400">Av. Libertador 1234, Piso 5, Dpto B.<br>CABA, Argentina.</p>
+                                <span
+                                    class="inline-block mt-2 bg-brand-900/50 text-brand-300 text-xs px-2 py-1 rounded border border-brand-800">También
+                                    Atención Online</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulario -->
+                <div class="bg-white rounded-2xl p-8 lg:p-10 shadow-xl">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-6">Envía tu consulta</h3>
+                    <!-- Formulario integrado con EmailJS -->
+                    <form id="contact-form" class="space-y-6 relative">
+                        <!-- Mensajes de estado -->
+                        <div id="form-status"
+                            class="hidden absolute -top-16 left-0 right-0 p-4 rounded-lg text-center font-medium transition-all shadow-md z-10"
+                            role="alert"></div>
+
+                        <div>
+                            <label for="nombre" class="block text-sm font-medium text-slate-700 mb-2">Nombre
+                                completo</label>
+                            <input type="text" id="nombre" name="name" required
+                                class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-slate-800 placeholder-slate-400 bg-slate-50 focus:bg-white"
+                                placeholder="Ej: Juan Pérez">
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-slate-700 mb-2">Correo
+                                electrónico</label>
+                            <input type="email" id="email" name="email" required
+                                class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-slate-800 placeholder-slate-400 bg-slate-50 focus:bg-white"
+                                placeholder="tu@email.com">
+                        </div>
+
+                        <div>
+                            <label for="motivo" class="block text-sm font-medium text-slate-700 mb-2">Motivo de consulta
+                                (opcional)</label>
+                            <select id="motivo" name="subject"
+                                class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-slate-800 bg-slate-50 focus:bg-white">
+                                <option value="">Selecciona una opción...</option>
+                                <option value="Terapia Individual">Terapia Individual</option>
+                                <option value="Terapia de Pareja">Terapia de Pareja</option>
+                                <option value="Atención Online">Atención Online</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="mensaje" class="block text-sm font-medium text-slate-700 mb-2">Mensaje</label>
+                            <textarea id="mensaje" name="message" rows="4" required
+                                class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-slate-800 placeholder-slate-400 bg-slate-50 focus:bg-white"
+                                placeholder="¿En qué puedo ayudarte?"></textarea>
+                        </div>
+
+                        <button type="submit" id="submit-btn"
+                            class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3.5 px-6 rounded-lg transition-all shadow-md hover:shadow-lg flex justify-center items-center">
+                            <span>Enviar Mensaje</span>
+                            <i class="fa-solid fa-spinner fa-spin hidden ml-2" id="loading-icon"></i>
+                        </button>
+                    </form>
+
+                    <!-- Script de EmailJS para procesar el formulario -->
+                    <script type="text/javascript">
+                        document.addEventListener("DOMContentLoaded", function () {
+                            document.getElementById('contact-form').addEventListener('submit', function (event) {
+                                event.preventDefault();
+
+                                const btn = document.getElementById('submit-btn');
+                                const btnText = btn.querySelector('span');
+                                const loadingIcon = document.getElementById('loading-icon');
+                                const statusDiv = document.getElementById('form-status');
+
+                                // Estado de carga
+                                btn.disabled = true;
+                                btn.classList.add('opacity-70', 'cursor-not-allowed');
+                                btnText.innerText = 'Enviando...';
+                                loadingIcon.classList.remove('hidden');
+                                statusDiv.className = 'hidden absolute -top-16 left-0 right-0 p-4 rounded-lg text-center font-medium transition-all shadow-md z-10'; // Reset
+
+                                // IDs de EmailJS A REEMPLAZAR
+                                const serviceID = 'service_ozo6xde';
+                                const templateID = 'template_qnqzckw';
+
+                                emailjs.sendForm(serviceID, templateID, this)
+                                    .then(() => {
+                                        // Éxito
+                                        statusDiv.innerText = '¡Mensaje enviado con éxito! Te responderemos pronto.';
+                                        statusDiv.classList.remove('hidden');
+                                        statusDiv.classList.add('bg-green-100', 'text-green-800', 'border', 'border-green-200');
+                                        document.getElementById('contact-form').reset();
+                                    }, (error) => {
+                                        // Error
+                                        console.log('FAILED...', error);
+                                        statusDiv.innerText = 'Hubo un error al enviar el mensaje. Por favor, intenta de nuevo.';
+                                        statusDiv.classList.remove('hidden');
+                                        statusDiv.classList.add('bg-red-100', 'text-red-800', 'border', 'border-red-200');
+                                    })
+                                    .finally(() => {
+                                        // Restaurar botón
+                                        btn.disabled = false;
+                                        btn.classList.remove('opacity-70', 'cursor-not-allowed');
+                                        btnText.innerText = 'Enviar Mensaje';
+                                        loadingIcon.classList.add('hidden');
+
+                                        // Ocultar mensaje después de 5 segundos
+                                        setTimeout(() => {
+                                            statusDiv.classList.add('hidden');
+                                        }, 5000);
+                                    });
+                            });
+                        });
+                    </script>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 py-12 border-t border-slate-800">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-slate-400 text-sm">
+            <div class="mb-4 md:mb-0 text-center md:text-left">
+                <span class="text-xl font-bold text-white tracking-tight mr-2">Lic. TuNombre.</span>
+                <br class="md:hidden">
+                &copy;
+                <script>document.write(new Date().getFullYear())</script> Todos los derechos reservados.
+            </div>
+            <div class="flex space-x-6">
+                <!-- Enlaces Legales Básicos -->
+                <a href="#" class="hover:text-white transition-colors">Términos y Condiciones</a>
+                <a href="#" class="hover:text-white transition-colors">Política de Privacidad</a>
+            </div>
+
+            <!-- Redes Sociales (Opcional) -->
+            <div class="flex space-x-4 mt-6 md:mt-0">
+                <a href="#" class="text-slate-400 hover:text-white transition-colors">
+                    <span class="sr-only">Instagram</span>
+                    <i class="fa-brands fa-instagram text-xl"></i>
+                </a>
+                <a href="#" class="text-slate-400 hover:text-white transition-colors">
+                    <span class="sr-only">LinkedIn</span>
+                    <i class="fa-brands fa-linkedin text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+    <a href="https://wa.me/1234567890?text=Hola,%20me%20gustaría%20agendar%20una%20consulta." target="_blank"
+        rel="noopener noreferrer"
+        class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-[#1EBE5D] hover:scale-110 transition-all duration-300 transform"
+        aria-label="Contactar por WhatsApp">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </a>
+
+</body>
+
+</html>

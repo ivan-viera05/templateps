@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f5;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: #0d9488;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .intro {
+            margin-top: 0;
+            font-size: 16px;
+            color: #475569;
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 15px;
+        }
+
+        .label {
+            font-weight: bold;
+            width: 100px;
+            color: #334155;
+        }
+
+        .value {
+            color: #0f172a;
+        }
+
+        .email-link {
+            color: #0d9488;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .message-box {
+            background-color: #f8fafc;
+            padding: 15px;
+            border-left: 4px solid #0d9488;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-style: italic;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #94a3b8;
+            background-color: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h2>Nueva Consulta Web</h2>
+        </div>
+
+        <div class="content">
+            <p class="intro">Has recibido un nuevo mensaje desde el formulario de contacto de tu Landing Page.</p>
+
+            <table>
+                <tr>
+                    <td class="label">Nombre:</td>
+                    <td class="value">{{user_name}}</td>
+                </tr>
+                <tr>
+                    <td class="label">Email:</td>
+                    <td class="value"><a href="mailto:{{user_email}}" class="email-link">{{user_email}}</a></td>
+                </tr>
+                <tr>
+                    <td class="label">Motivo:</td>
+                    <td class="value">{{subject}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border-bottom: none; padding-bottom: 0;">
+                        <div style="font-weight: bold; color: #334155; margin-top: 10px;">Mensaje:</div>
+                        <div class="message-box">
+                            {{message}}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="footer">
+            Este correo fue enviado automáticamente desde tu sitio web profesional.
+        </div>
+    </div>
+
+</body>
+
+</html>
